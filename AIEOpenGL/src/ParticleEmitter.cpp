@@ -114,14 +114,15 @@ void ParticleEmitter::Emit()
 	particle.size = startSize;
 
 	// randomise velocity direction and strength
-	float velocity = (rand() / (float)RAND_MAX) *
-		(maxVelocity - minVelocity) + minVelocity;
+	//float velocity = (rand() / (float)RAND_MAX) *
+	//	(maxVelocity - minVelocity) + minVelocity;
 
-	particle.velocity.x = (rand() / (float)RAND_MAX) * 2 - 1;
-	particle.velocity.y = (rand() / (float)RAND_MAX) * 2 - 1;
-	particle.velocity.z = (rand() / (float)RAND_MAX) * 2 - 1;
+//	particle.velocity.y = (rand() / (float)RAND_MAX) * 2 - 1;
+//	particle.velocity.z = (rand() / (float)RAND_MAX) * 2 - 1;
+//	particle.velocity.x = (rand() / (float)RAND_MAX) * 2 - 1;
 
-	particle.velocity = glm::normalize(particle.velocity) * velocity;
+	particle.velocity = glm::vec3(0);
+
 }
 
 
@@ -152,8 +153,9 @@ void ParticleEmitter::Update(float deltaTime, const glm::mat4& cameraTransform)
 		else
 		{
 			// move particle
-			particle->position += particle->velocity * deltaTime;
+			//particle->position += particle->velocity * deltaTime;
 
+			particle->Update(deltaTime);
 			// size particle
 			particle->size = glm::mix(startSize, endSize,
 				particle->lifetime / particle->lifespan);

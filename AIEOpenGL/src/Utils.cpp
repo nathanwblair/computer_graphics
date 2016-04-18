@@ -125,3 +125,13 @@ vector<float> GeneratePerlin(uint length)
 
 	return perlinData;
 }
+
+float MaxLimit(float value, float limit, float roundedness)
+{
+	return (glm::log(-(value / limit) + 1.0f) + roundedness) / roundedness;
+}
+
+float SoftMinLimit(float value, float limit, float roundedness)
+{
+	return (glm::log(value / limit) + roundedness) / roundedness - 1.0f;
+}
