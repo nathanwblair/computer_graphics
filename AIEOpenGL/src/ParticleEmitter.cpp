@@ -144,7 +144,7 @@ void ParticleEmitter::Update(float deltaTime, const glm::mat4& cameraTransform)
 	for (uint i = 0; i < firstDead; i++)
 	{
 		Particle* particle = &particles[i];
-		particle->lifetime += deltaTime;
+		//particle->lifetime += deltaTime;
 		if (particle->lifetime >= particle->lifespan) {
 			// swap last alive with this one
 			*particle = particles[firstDead - 1];
@@ -157,8 +157,8 @@ void ParticleEmitter::Update(float deltaTime, const glm::mat4& cameraTransform)
 
 			particle->Update(deltaTime);
 			// size particle
-			particle->size = glm::mix(startSize, endSize,
-				particle->lifetime / particle->lifespan);
+			//particle->size = glm::mix(startSize, endSize,
+			//	particle->lifetime / particle->lifespan);
 
 			// color particle
 			particle->color = glm::mix(startColor, endColor,

@@ -25,16 +25,17 @@ struct Particle
 	float mass;
 	float maxMass;
 
+	std::function<glm::vec3(Particle&, const glm::vec3&, float)> velocityModifier;
+
 	Particle() : weight(1.0f), mass(1.0f), maxMass(3.0f)
 	{
 		velocityModifier = &Particle::Seek;
+		target = this;
 	}
-
-	std::function<glm::vec3(const glm::vec3& input, float weight)> velocityModifier;
 
 	void Update(float deltaTime) 
 	{
-		velocity += (glm::vec3)Modify(this, velocityModifier, velocity, weight * deltaTime);
+		velocity += Modify(this, velocityModifier, velocity, weight * deltaTime);
 	}
 
 	glm::vec3 Seek(const glm::vec3& input, float weight)
@@ -42,15 +43,15 @@ struct Particle
 		return glm::normalize(target->position);
 	}
 
-	//glm::vec3 SeekArea(const glm::vec3& input, float weight)
-	//{
-	//	auto distance = glm::abs(glm::length(glm::distance(input, target->position)));
+	glm::vec3 SeekArea(const glm::vec3& input, float weight)
+	{
+		auto distance = glm::abs(glm::length(glm::distance(input, target->position)));
 
-	//	return Seek(input, SoftMinLimit(distance, target->radius, target->Softness()) * weight);
-	//}
+		return Seek(input, SoftMinLimit(distance, target->radius, target->Softness()) * weight);
+	}
 
-	//float Softness()
-	//{
-	//	return (maxMass - MaxLimit(mass, maxMass, 5.0f)) / radius;
-	//}
+	float Softness()
+	{
+		return (maxMass - MaxLimit(mass, maxMass, 5.0f)) / radius;
+	}
 };

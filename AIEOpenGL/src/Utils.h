@@ -41,9 +41,9 @@ string FromFile(string path);
 GLenum ToGLSlot(int texture_slot);
 
 template<class Entity, typename Modifier, typename T, typename number>
-T Modify(Entity * entity, Modifier& modifier, T value, number weight)
+T Modify(Entity * parent, Modifier& modifier, T value, number weight)
 {
-	return modifier(entity, value, weight);
+	return modifier(*parent, value, weight);
 }
 
 float MaxLimit(float value, float limit, float roundedness = 2.5f);
