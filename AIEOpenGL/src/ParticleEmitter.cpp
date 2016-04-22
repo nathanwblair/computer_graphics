@@ -153,9 +153,9 @@ void ParticleEmitter::Update(float deltaTime, const glm::mat4& cameraTransform)
 		else
 		{
 			// move particle
-			//particle->position += particle->velocity * deltaTime;
 
 			particle->Update(deltaTime);
+			particle->position += particle->velocity * deltaTime;
 			// size particle
 			//particle->size = glm::mix(startSize, endSize,
 			//	particle->lifetime / particle->lifespan);

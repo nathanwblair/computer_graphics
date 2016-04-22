@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BaseApplication.h"
+#include "..\BaseApplication.h"
 
 #include "..\RenderData.h"
 #include "..\ShaderProgram.h"

@@ -81,7 +81,7 @@ bool ComputerGraphics::update(float deltaTime) {
     m_camera->update(deltaTime);
 	elapsedTime += deltaTime;
 
-	emitter.position += vec3(glm::sin(elapsedTime), 0, 0);
+	//emitter.position += vec3(glm::sin(elapsedTime), 0, 0);
 
 	emitter.Update(deltaTime, m_camera->getTransform());
     // clear the gizmos out for this frame
@@ -112,15 +112,15 @@ void ComputerGraphics::drawGUI()
 
 void ComputerGraphics::draw() {
 	Clear();
-	terrain.material.Init(terrain.shaderProgram);
-	terrain.Draw(*m_camera);
+	//terrain.material.Init(terrain.shaderProgram);
+	//terrain.Draw(*m_camera);
 
 	
 	emitter.shaderProgram.Use();
 	emitter.shaderProgram.SetUniform("projectionView", m_camera->getProjectionView());
 	emitter.Draw();
-	soulspear.Draw(*m_camera, m_lightDir, lightColor);
-	planet.Draw(*m_camera, m_lightDir, lightColor);
+	//soulspear.Draw(*m_camera, m_lightDir, lightColor);
+	//planet.Draw(*m_camera, m_lightDir, lightColor);
 
 
     // display the 3D gizmos
